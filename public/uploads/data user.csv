@@ -1,0 +1,5 @@
+S.No,Nip,Nama,Alamat,Tempat_Lahir,Tanggal_Lahir,Email,Password,Role
+1,1111,Nury 1,pikatan 1,blitar 1,8/12/2001,nury1@mail.com,12456,admin
+2,2222,Nury 2,pikatan 2,blitar 2,8/13/2001,nury1@mail.com,12457,guru
+3,3333,Nury 3,pikatan 3,blitar 3,8/14/2001,nury1@mail.com,12458,admin
+4,4444,Nury 4,pikatan 4,blitar 4,8/15/2001,nury1@mail.com,12459,guru

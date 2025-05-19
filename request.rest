@@ -1,0 +1,36 @@
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjRkZTJkMDFlYjc0ZWFjMDEyZGRjZDkiLCJuaXAiOiIxMjMiLCJuYW1lIjoibnVyeSIsImVtYWlsIjoibnVyeUBtYWlsLmNvbSIsImFsYW1hdCI6ImJsaXRhciIsInRtcGxhaGlyIjoiYmxpdGFyIiwidGdsbGFoaXIiOiIyMDAxLTEyLTA4VDAwOjAwOjAwLjAwMFoiLCJyb2xlIjoiZ3VydSIsImlhdCI6MTcxNjM4NTA2NywiZXhwIjoxNzE2Mzg1MDgyfQ.Q1ikDKjJwEBA7oT3gZ5Pdx-QeEbm_Ghjh_5IYYE5qyc
+
+###
+GET http://localhost:5000/token
+###
+GET http://localhost:5000/kelass/661fd32530c55c7be1fab5c
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "nip" : "123",
+    "name": "nury",
+    "email" : "nury@mail.com",
+    "password": "123456",
+    "alamat": "blitar",
+    "tgllahir": "2001-12-08",
+    "tmplahir": "blitar",
+    "role" : "guru"
+}
+
+###
+PATCH  http://localhost:5000/detailabsensis/661ff496edf3b3e78f1b4030
+Content-Type: application/json
+
+{
+    "absensi_id": "661ff0aa21b846f554b2ae9c",
+    "siswa_id": "661fec602dc14d7dd081a30a",
+    "status": "I",
+    "keterangan": "Izin Liburan Dengan Keluarga"
+}
+
+###
+DELETE http://localhost:5000/absensis/661ff09021b846f554b2ae9a
+
