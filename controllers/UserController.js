@@ -133,7 +133,7 @@ export const Login = async (req, res) => {
     await User.updateOne({ _id: user._id }, { refresh_token: refreshToken });
 res.cookie("refreshToken", refreshToken, {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",  // false di dev
+  secure: process.env.NODE_ENV === "development",  // false di dev
   sameSite: "None",                               // biar cookie bisa lintas origin
   maxAge: 24 * 60 * 60 * 1000,
 });
