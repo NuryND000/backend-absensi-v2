@@ -28,7 +28,7 @@ db.once('open', () => console.log('Database Connected...'));
 app.use(cookieParser());
 app.use(cors({ 
   credentials: true, 
-  origin: ['http://localhost:3000', 'https://frontend-absensi-v2.vercel.app'] 
+  origin: ['http://localhost:3000', 'http://student-attendance.myuniv.cloud.'] 
 }));
 app.use(express.json());
 app.use(UserRoute);
