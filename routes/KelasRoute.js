@@ -1,5 +1,5 @@
 import express from "express";
-import { getKelas, getKelasById, saveKelas, updateKelas, deleteKelas, importKelas } from "../controllers/kelasController.js";
+import { getKelas, getKelasById, saveKelas, updateKelas, deleteKelas, importKelas } from "../controllers/KelasController.js";
 import { verifyToken, AdminOnly } from "../middleware/VerifyToken.js";
 import { fileURLToPath } from "url";
 import multer from "multer";

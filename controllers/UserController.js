@@ -134,7 +134,7 @@ export const Login = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: false, // Ubah ke true jika menggunakan HTTPS
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
       // secure: true  // Uncomment if using https
     });
