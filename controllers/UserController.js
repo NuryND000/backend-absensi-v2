@@ -131,13 +131,12 @@ export const Login = async (req, res) => {
       }
     );
     await User.updateOne({ _id: user._id }, { refresh_token: refreshToken });
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: false, // Ubah ke true jika menggunakan HTTPS
-      sameSite: "None",
-      maxAge: 24 * 60 * 60 * 1000,
-      // secure: true  // Uncomment if using https
-    });
+res.cookie("refreshToken", refreshToken, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",  // false di dev
+  sameSite: "None",                               // biar cookie bisa lintas origin
+  maxAge: 24 * 60 * 60 * 1000,
+});
     res.json({ accessToken });
   } catch (error) {
     res.status(404).json({ msg: "user tidak ditemukan" });

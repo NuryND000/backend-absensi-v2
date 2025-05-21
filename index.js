@@ -26,7 +26,10 @@ db.on('error', (error) => console.log(error));
 db.once('open', () => console.log('Database Connected...'));
 
 app.use(cookieParser());
-app.use(cors({ credentials:true, origin:'http://localhost:3000'}));
+app.use(cors({ 
+  credentials: true, 
+  origin: ['http://localhost:3000', 'http://student-attendance.myuniv.cloud.'] 
+}));
 app.use(express.json());
 app.use(UserRoute);
 app.use(KelasRoute);
