@@ -101,13 +101,12 @@ export const deleteUser = async (req, res) => {
 
 export const Login = async (req, res) => {
   try {
-    const users = await User.find({ username: req.body.username });
-    if (!users.length)
-      return res.status(404).json({ msg: "user tidak ditemukan" });
-    const match = await bcrypt.compare(req.body.password, users[0].password);
-    if (!match) return res.status(400).json({ msg: "Wrong Password" });
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
 
-    const user = users[0];
+    const match = await bcrypt.compare(req.body.password, user.password);
+    if (!match) return res.status(400).json({ msg: "Password salah" });
+
     const accessToken = jwt.sign(
       {
         userId: user._id,
@@ -116,9 +115,10 @@ export const Login = async (req, res) => {
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "20s",
+        expiresIn: "15m", // token berlaku 15 menit
       }
     );
+
     const refreshToken = jwt.sign(
       {
         userId: user._id,
@@ -130,16 +130,20 @@ export const Login = async (req, res) => {
         expiresIn: "1d",
       }
     );
+
     await User.updateOne({ _id: user._id }, { refresh_token: refreshToken });
-res.cookie("refreshToken", refreshToken, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",  // false di dev
-  sameSite: "None",                               // biar cookie bisa lintas origin
-  maxAge: 24 * 60 * 60 * 1000,
-});
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.json({ accessToken });
   } catch (error) {
-    res.status(404).json({ msg: "user tidak ditemukan" });
+    console.error(error);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
 
